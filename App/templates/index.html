@@ -3,12 +3,9 @@
 {% block content %}
 <hr>
 <div class="container-fluid">
-    <!-- Jumbotron -->
-<div class="card card-image" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/forest2.jpg);">
+  <div class="card card-image" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/forest2.jpg);">
     <div class="text-white text-center rgba-stylish-strong py-5 px-4">
       <div class="py-5">
-  
-        <!-- Content -->
         <h5 class="h5 orange-text"><i class="fas fa-graduation-cap"></i> Flash Cards</h5>
         <h2 class="card-title h2 my-4 py-2">Ever used flashcards at home but you keep losing them ?</h2>
         <p class="mb-4 pb-2 px-md-5 mx-md-5">Well welcome to FlashCards. Where you can access flashcards from different subjects.</p>
@@ -16,6 +13,42 @@
       </div>
     </div>
   </div>
-  <!-- Jumbotron -->
+  <hr>
+  <div class="row">
+    {% for card in flashcards %}
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">{{card.subject}}</div>
+        <div class="card-body">
+          <h5 class="card-title">{{card.card_title}}</h5>
+          <p class="card_text">{{card.card_notes}}</p>
+        </div>
+      </div>
+      <br>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="pagination" style="font-size: 30px;letter-spacing: 10px;">
+        {% if flashcards.has_previous %}
+          <a href="?page=1"> </a>
+          <a href="?page={{flashcards.previous_page_number}}"> < </a>
+        {% endif %}
+        {% for num in flashcards.paginator.page_range %}
+          {% if flashcards.number == num %}
+            <strong>{{num}}</strong>
+          {% elif num > flashcards.number|add:'-3' and num < flashcards.number|add:'3' %}
+            {{ num }}
+          {% endif %}
+        {% endfor %}
+        {% if flashcards.has_next %}
+        <a href="?page={{flashcards.next_page_number}}"> > </a>
+        <a href="?page={{flashcards.paginator.num_pages}}"> </a>
+        {% endif %}
+      </div><br><br>
+    </div>
+  </div>
 </div>
 {% endblock %}

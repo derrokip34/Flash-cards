@@ -28,3 +28,8 @@ class FlashCard(models.Model):
 
     def delete_card(self):
         self.delete()
+
+    @classmethod
+    def get_all_flashcards(cls):
+        flashcards = FlashCard.objects.all()
+        return flashcards

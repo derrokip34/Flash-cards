@@ -1,10 +1,21 @@
 from django.shortcuts import render,redirect
 from .models import FlashCard
 from .forms import PostFlashCard
+from django.core.paginator import Paginator,EmptyPage,InvalidPage,PageNotAnInteger
 
 # Create your views here.
 def home(request):
+    flashcards = FlashCard.get_all_flashcards()
+    paginator = Paginator(flashcards,3)
 
+    try:
+        page = request.GET.get('page')
+    except ValueError:
+        page = 1
+    try:
+        flashcards = paginator.page(page)
+    except (EmptyPage,InvalidPage):
+        flashcards = paginator.page(paginator.num_pages)
     return render(request,'index.html',locals())
 
 def post_flash_card(request):
