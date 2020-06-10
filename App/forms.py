@@ -1,5 +1,7 @@
 from django import forms
-from .models import FlashCard
+from .models import FlashCard,Subject
+
+
 
 class PostFlashCard(forms.ModelForm):
     class Meta:
@@ -7,5 +9,5 @@ class PostFlashCard(forms.ModelForm):
         exclude = ['user']
         widgets = {
             'card_notes':forms.Textarea(),
-            'subject': forms.CheckboxSelectMultiple()
+            'subject':forms.Select()
         }
