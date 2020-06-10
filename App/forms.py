@@ -11,3 +11,12 @@ class PostFlashCard(forms.ModelForm):
             'card_notes':forms.Textarea(),
             'subject':forms.Select()
         }
+
+class UpdateFlashCardForm(forms.ModelForm):
+    class Meta:
+        model = FlashCard
+        exclude = ['user']
+        widgets = {
+            'card_notes':forms.Textarea(),
+            'subject':forms.Select()
+        }

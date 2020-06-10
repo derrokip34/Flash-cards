@@ -21,3 +21,19 @@ def post_flash_card(request):
 
     title = 'New Flash Card'
     return render(request,'new_flash_card.html',locals())
+
+def update_flash_card(request,id):
+    current_user = request.user
+    card = FlashCard.objects.filter(id=id).first()
+    if request.method == 'POST':
+        form = PostFlashCard(request.POST,instance=card)
+        if form.is_valid():
+            flashcard = form.save(commit=False)
+            flashcard.user = current_user
+            flashcard.save()
+        return redirect('home')
+    else:
+        form = PostFlashCard(instance=card)
+
+    title = 'Update Flash Card'
+    return render(request,'update_flash_card.html',locals())
