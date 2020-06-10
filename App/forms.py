@@ -6,5 +6,6 @@ class PostFlashCard(forms.ModelForm):
         model = FlashCard
         exclude = ['user']
         widgets = {
-            'card_notes':forms.Textarea()
+            'card_notes':forms.Textarea(),
+            'subject': forms.CheckboxSelectMultiple()
         }
