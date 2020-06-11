@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <hr>
@@ -18,7 +19,7 @@
     {% for card in flashcards %}
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">{{card.subject}}</div>
+        <div class="card-header"><a href="/subject/cards/{{card.subject}}/{{card.subject_id}}">{{card.subject}}</a></div>
         <div class="card-body">
           <h5 class="card-title">{{card.card_title}}</h5>
           <p class="card_text">{{card.card_notes}}</p>

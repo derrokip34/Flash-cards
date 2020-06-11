@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center">{{subject.subject}} cards</h2>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        {% if subject_cards %}
+        {% for card in subject_cards %}
+        <div class="col-md-6">
+          <div class="card mb-2">
+            <div class="card-header">Posted by {{card.user.username}}</div>
+            <div class="card-body">
+              <h5 class="card-title">{{card.card_title}}</h5>
+              <p class="card_text">{{card.card_notes}}</p>
+            </div>
+          </div>
+          <br>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="row">
+          <div class="col-md-12">
+              <h1 class="text-center">No Cards For {{subject.subject}}</h1>
+          </div>
+      </div>
+      {% endif %}
+</div>
+{% endblock %}

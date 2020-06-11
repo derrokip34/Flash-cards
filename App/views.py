@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
-from .models import FlashCard
-from .forms import PostFlashCard
+from .models import FlashCard,Subject
+from .forms import PostFlashCard,UpdateFlashCardForm
 from django.core.paginator import Paginator,EmptyPage,InvalidPage,PageNotAnInteger
 
 # Create your views here.
@@ -48,3 +48,10 @@ def update_flash_card(request,id):
 
     title = 'Update Flash Card'
     return render(request,'update_flash_card.html',locals())
+
+def subject_cards(request,subject,subject_id):
+    subject = Subject.objects.filter(id=subject_id).first()
+    subject_cards = FlashCard.objects.filter(subject=subject).all()
+
+    title = f'{subject.subject} cards'
+    return render(request,'subject.html',locals())
