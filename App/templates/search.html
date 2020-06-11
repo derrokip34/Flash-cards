@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <hr>
+        {% if searched_flashcards %}
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-center">{{parameter}} search results</h2>
+                <hr>
+            </div>
+        </div>
+        {% else %}
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-center">No search results for {{parameter}}</h2>
+                <hr>
+            </div>
+        </div>
+        {% endif %}
+        <div class="row">
+            {% if searched_flashcards %}
+            {% for card in searched_flashcards %}
+            <div class="col-md-6">
+            <div class="card mb-2">
+                <div class="card-header">Posted by {{card.user.username}}</div>
+                <div class="card-body">
+                <h5 class="card-title">{{card.card_title}}</h5>
+                <p class="card_text">{{card.card_notes}}</p>
+                </div>
+            </div>
+            <br>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+{% endblock %}

@@ -55,3 +55,10 @@ def subject_cards(request,subject,subject_id):
 
     title = f'{subject.subject} cards'
     return render(request,'subject.html',locals())
+
+def search_flashcard(request):
+    all_flashcards = FlashCard.objects.all()
+    parameter = request.GET.get('flashcard')
+    searched_flashcards = FlashCard.objects.filter(card_title__icontains=parameter).all()
+
+    return render(request,'search.html',locals())

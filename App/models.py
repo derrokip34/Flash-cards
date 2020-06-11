@@ -33,3 +33,8 @@ class FlashCard(models.Model):
     def get_all_flashcards(cls):
         flashcards = FlashCard.objects.all()
         return flashcards
+
+    @classmethod
+    def search_flashcard(cls,search_term):
+        flashcards = FlashCard.objects.filter(card_title__icontains=search_term).all()
+        return flashcards
